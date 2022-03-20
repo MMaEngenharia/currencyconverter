@@ -8,7 +8,7 @@
 		<version>2.6.4</version>
 		<relativePath/>
 	</parent>
-	<groupId>com.project</groupId>
+	<groupId>com.currencyconverter</groupId>
 	<artifactId>currency-converter</artifactId>
 	<version>1.0.0</version>
 	<name>project</name>
