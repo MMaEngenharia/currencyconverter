@@ -16,7 +16,7 @@ public class ExchengeApiHelp {
     private static final String BASE = "EUR";
     private static final String URL = "http://api.exchangeratesapi.io/latest?access_key=%s&base=%s";
 
-    public static BigDecimal converte(String from, String to, BigDecimal amount) {
+    public static ConverteData converte(String from, String to, BigDecimal amount) {
         ExchengeApiData exchengeApiData = getConversionRate();
 
         BigDecimal fromValue = exchengeApiData.getRates().entrySet().stream()
@@ -31,13 +31,20 @@ public class ExchengeApiHelp {
             .findFirst()
             .orElseThrow(() -> new NotAcceptable(String.format(MESSAGE, to)));
 
-        return toValue
+
+        BigDecimal destinationValue = toValue
             .divide(
                 fromValue,
                 SCALE,
                 RoundingMode.HALF_EVEN
             )
             .multiply(amount);
+
+        return new ConverteData
+            .Builder()
+            .conversionRate(toValue)
+            .destinationValue(destinationValue)
+            .build();
     }
 
     public static ExchengeApiData getConversionRate() {
