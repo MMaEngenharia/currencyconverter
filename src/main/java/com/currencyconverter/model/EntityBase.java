@@ -1,12 +1,16 @@
 package com.currencyconverter.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.beans.BeanUtils;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 @MappedSuperclass
 public abstract class EntityBase<ID> implements Serializable {
 
@@ -16,16 +20,17 @@ public abstract class EntityBase<ID> implements Serializable {
     private ID id;
 
     @NotNull
-    @Column(name = "date", nullable = false)
+    @Column(name = "date", nullable = false, updatable = false)
     private LocalDateTime date;
 
     @NotNull
+    @JsonIgnore
     @Column(nullable = false)
-    private Boolean excluded;
+    private Byte excluded;
 
     EntityBase() {
-        excluded = Boolean.FALSE;
-        date = LocalDateTime.now();
+        excluded = 0;
+        date = LocalDateTime.now(ZoneOffset.UTC);
     }
 
     public ID getId() {
@@ -44,11 +49,11 @@ public abstract class EntityBase<ID> implements Serializable {
         this.date = date;
     }
 
-    public Boolean getExcluded() {
+    public Byte getExcluded() {
         return excluded;
     }
 
-    public void setExcluded(Boolean excluded) {
+    public void setExcluded(Byte excluded) {
         this.excluded = excluded;
     }
 
