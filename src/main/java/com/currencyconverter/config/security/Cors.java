@@ -1,4 +1,4 @@
-package com.currencyconverter.config;
+package com.currencyconverter.config.security;
 
 import org.springframework.core.Ordered;
 import org.springframework.web.filter.OncePerRequestFilter;
