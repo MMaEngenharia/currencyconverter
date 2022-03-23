@@ -1,4 +1,4 @@
-package com.currencyconverter.util.api;
+package com.currencyconverter.util.api.data;
 
 import java.math.BigDecimal;
 import java.util.Map;

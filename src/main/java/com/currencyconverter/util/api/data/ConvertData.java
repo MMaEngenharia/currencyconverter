@@ -1,19 +1,15 @@
-package com.currencyconverter.util.api;
+package com.currencyconverter.util.api.data;
 
 import java.math.BigDecimal;
 
-public class ConverteData {
+public class ConvertData {
 
     private BigDecimal conversionRate;
     private BigDecimal destinationValue;
 
-    private ConverteData() {
-
-    }
-
-    private ConverteData(Builder builder) {
-        this.conversionRate = builder.conversionRate;
-        this.destinationValue = builder.destinationValue;
+    private ConvertData(Builder builder) {
+        conversionRate = builder.conversionRate;
+        destinationValue = builder.destinationValue;
     }
 
     public BigDecimal getConversionRate() {
@@ -24,23 +20,23 @@ public class ConverteData {
         return destinationValue;
     }
 
-    static class Builder {
+    public static class Builder {
 
         private BigDecimal conversionRate;
         private BigDecimal destinationValue;
 
-        Builder conversionRate(BigDecimal conversionRate) {
+        public Builder conversionRate(BigDecimal conversionRate) {
             this.conversionRate = conversionRate;
             return this;
         }
 
-        Builder destinationValue(BigDecimal destinationValue) {
+        public Builder destinationValue(BigDecimal destinationValue) {
             this.destinationValue = destinationValue;
             return this;
         }
 
-        ConverteData build() {
-            return new ConverteData(this);
+        public ConvertData build() {
+            return new ConvertData(this);
         }
     }
 }
